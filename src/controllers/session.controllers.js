@@ -4,7 +4,6 @@ import generateToken from "../utils/jwt.js"
 
 export const login = async (req, res) => {
     try {
-        console.log(req)
         if(!req.user){
             res.status(401).send('Usuario o contraseña erronea')
         }
@@ -21,10 +20,10 @@ export const login = async (req, res) => {
             masAge: 360000
         })
 
-        res.status(200).redirect('/')
+        res.status(200).redirect({succes: true, redirect:'templates/home'})
     } catch (error) {
         console.log(error)
-        res.status(500).send('Error al loguear usuario')
+        res.status(500).send({message: 'Error al loguearse'})
     }
 }
 
