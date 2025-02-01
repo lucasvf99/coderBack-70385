@@ -8,13 +8,16 @@ import MongoStore from 'connect-mongo'
 import mongoose from 'mongoose'
 import initializatePassport from './config/passport.config.js'
 import passport from 'passport'
+//rutas
 import sessionRouter from './routes/session.routes.js'
+import productsRouter from './routes/products.routes.js'
 
 const app = express()
 const PORT = 8080
 const hbs = create()
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 //cookie
 app.use(cookieParser('lucasSecret'))
 //session
@@ -46,6 +49,7 @@ console.log('Directorio base', __dirname)
 
 app.use('/public', express.static(__dirname + '/public'))
 app.use('/api/session', sessionRouter)
+app.get('/', productsRouter)
 
 app.listen(PORT, ()=>{
     console.log(`Servidor corriendo en el puerto ${PORT}`)

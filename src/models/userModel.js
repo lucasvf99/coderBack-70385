@@ -32,11 +32,12 @@ const userSchema = new Schema ({
     },
 })
 
-userSchema.post('save', async function name (userCreated){
+userSchema.post('save', async function name (doc){
     try {
-        const newCart = await cartModel.create({porducts: []})
-        userCreated.cart = newCart._id
-        await userCreated.save()
+        if(!doc.cart){
+            const newCart = await cartModel.create({products:[]})
+            await model('user').findByIdAndUpdate(doc._id, {cart: newCart._id})
+        }
         
     } catch (error) {
         console.log('Error al generar carrito', error)
