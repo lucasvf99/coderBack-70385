@@ -6,7 +6,7 @@ export const getProducts = async (req, res) => {
     try { 
         const limit = req.query.limit
         console.log(limit)
-        const page = req.params.page
+        const page = req.query.page
         const {filter, metFilter, metOrder, ord } = req.body
         const pag = page !== undefined ? page : 1
         const lim = limit !== undefined ? limit : 10
@@ -23,11 +23,13 @@ export const getProducts = async (req, res) => {
             lean:true ,
             select: 'title description category price stock code thumbnails'
         })
+
         
         products.pageNumbers = Array.from({length: products.totalPages}, (_, i) => ({
             number: i + 1 ,
             isCurrent: i + 1 === products.page
         }))
+
 
         console.log(products);
         

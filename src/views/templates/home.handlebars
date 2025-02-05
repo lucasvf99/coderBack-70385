@@ -21,7 +21,7 @@
         <ul class="pagination justify-content-center">
             {{#if products.hasPrevPage}}
             <li class="page-item">
-                <a  class="page-link" href="?page={{products.prevPage}}&&limit={{prod.limit}}" aria-label="Previus">
+                <a  class="page-link" href="http://localhost:8080/?page={{products.prevPage}}&limit={{products.limit}}" aria-label="Previus">
                     <span aria-hidden="true">
                         &laquo;
                     </span>
@@ -30,12 +30,12 @@
             {{/if}}
              {{#each products.pageNumbers}}
                 <li class="page-item {{#if this.isCurrent}} active {{/if}}">{{!--   --}}
-                    <a class="page-link" href="?page={{this.number}}&&limit={{products.limit}}">{{this.number}}</a>
+                    <a class="page-link" href="http://localhost:8080/?page={{this.number}}&limit={{../products.limit}}">{{this.number}}</a>
                 </li>
                 {{/each}}
                 {{#if products.hasNextPage}}
                 <li class="page-item">
-                    <a href="?page={{products.nextPage}}&&limit={{products.limit}}" aria-label="Next" class="page-link">
+                    <a href="http://localhost:8080/?page={{products.nextPage}}&limit={{products.limit}}" aria-label="Next" class="page-link">
                         <span aria-hidden="true ">
                             &raquo;
                         </span>
