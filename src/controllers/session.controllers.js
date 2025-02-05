@@ -20,7 +20,7 @@ export const login = async (req, res) => {
             masAge: 360000
         })
 
-        res.status(200).redirect({succes: true, redirect:'templates/home'})
+        res.status(200).json({ success: true, render: '/' })
     } catch (error) {
         console.log(error)
         res.status(500).send({message: 'Error al loguearse'})
@@ -32,14 +32,12 @@ export const register = async (req, res) => {
         if(!req.user){
             res.status(400).send('Ya existe un usuario con ese mail')
         }
-        res.status(201).send('Usuario creado correctamente')
+        res.status(201).send({succes: true, render:'/'})
     } catch (error) {
         console.log(error)
         res.status(500).send('Error al crear usuario')
     }
 }
-
-
 
 export const viewLogin = async (req, res) => {
     try {

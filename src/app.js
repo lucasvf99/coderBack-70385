@@ -48,12 +48,12 @@ app.set('views', path.join(__dirname, '/views'))
 console.log('Directorio base', __dirname)
 
 app.use('/public', express.static(__dirname + '/public'))
-app.use('/api/products', productsRouter)
+app.use('/', productsRouter)
 app.use('/api/session', sessionRouter)
 
-app.get('/', (req,res) => {
-    res.status(200).res({message: 'Usuario logueado'})
-})
+// app.get('/', (req,res) => {
+//     res.status(200).render( 'templates/home')
+// })
 
 app.listen(PORT, ()=>{
     console.log(`Servidor corriendo en el puerto ${PORT}`)

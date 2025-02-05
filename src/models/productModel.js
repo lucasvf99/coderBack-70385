@@ -7,7 +7,7 @@ const productSchema = new Schema({
             require: true,
         },
         description: {
-            type:String,
+            type: String,
             require: true
         },
         category: {
@@ -16,7 +16,7 @@ const productSchema = new Schema({
             index: true // indice 
         },
         price: {
-            type:Number,
+            type: Number,
             require: true
         },
         status:{
@@ -32,13 +32,14 @@ const productSchema = new Schema({
             require: true,
             unique: true
         },
-        thumbnail: {
+        thumbnails: {
+            type: Array,
             default: []
         }
 
 
 })
 productSchema.plugin(paginate)
-const producModel = model('products', productSchema)
+const productModel = model('products', productSchema)
 
-export default producModel
+export default productModel
