@@ -8,6 +8,6 @@ productsRouter.get('/', getProducts )
 productsRouter.get('/product/:pId', getProduct)
 productsRouter.post('/createproduct', createProduct )
 productsRouter.post('/updateproduct', authorization('Admin'), updateProduct)
-productsRouter.post('/deleteproduct', authorization('Admin'), deleteProduct)
+productsRouter.delete('/deleteproduct', authorization('Admin'), deleteProduct)
 
 export default productsRouter
