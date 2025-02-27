@@ -1,0 +1,19 @@
+h1{
+    text-align: center;
+    margin: 20px 0px;
+}
+.box-quantity{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 20px;
+    align-items: center;
+}
+.box-quantity button {
+    width: 30%;
+    margin: 10px;
+}
+
+#cart{
+    cursor: pointer;
+}

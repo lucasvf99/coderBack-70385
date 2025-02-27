@@ -1,0 +1,10 @@
+#cart{
+    cursor: pointer;
+}
+.card-body{
+    display: flex;
+    justify-content: space-between;
+}
+.delete-product{
+    border-radius: 50px;
+}

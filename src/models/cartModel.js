@@ -11,7 +11,8 @@ const cartSchema = new Schema ( {
                 },
                 quantity:{
                     type:Number,
-                    require:true
+                    require:true,
+                    default : 1
                 }
             }
         ],
@@ -19,7 +20,7 @@ const cartSchema = new Schema ( {
     }
 })
 cartSchema.pre('findOne', function(){
-    this.populate('products.id_prod')
+    this.populate('products.id_prod').lean()
 })
 
 const cartModel = model('carts', cartSchema)

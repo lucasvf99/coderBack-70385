@@ -1,15 +1,24 @@
+
+    <h1>Nuestros Productos</h1>
+
 <div class="container mt-5">
     <div class="row">
             {{#each products.docs}}
-            <div class="col-md-4 mb">
-                <div class="card h-80 shadows-md">
+            <div class="col-md-3 mb" >
+                <div  class="card h-80 shadows-md" >
                         <img src={{this.thumbnails}} alt="" 
                         class="card-img-top rouned img-fluid object-fit-scale">
-                    <div class="card-body">
+                    <div class="card-body" id="{{this._id}}">
                         <h5 class="card-title">{{this.title}}</h5>
-                        <p class="card-text">Price: {{this.price}}</p>
+                        <p class="card-text">Price: {{this.price}}€</p>
                         <p class="card-text">Stock: {{this.stock}}</p>
-                        <a href="api/products/{{this.id}}"></a>
+                        <a href="/product/{{this.id}}">Ver Producto</a>
+                        <div class="box-quantity">
+                            <button class="btn btn-primary btn-less">-</button>
+                            <p class="card-text" class="p-quantity">1</p>
+                            <button class="btn btn-primary btn-plus">+</button>
+                        </div>
+                        <button class="btn btn-primary button " type="button" >Agregar al carrito</button>
                     </div>
                 </div>
             </div>
