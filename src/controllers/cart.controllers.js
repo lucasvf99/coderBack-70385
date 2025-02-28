@@ -55,7 +55,7 @@ export const insertProductCart = async (req,res) => {
         if(cart){
             const indice = cart.products.findIndex(el => el.id_prod._id.toString() === pId) 
             if(indice != -1){
-                    cart.products[indice].quantity = quantity
+                    cart.products[indice].quantity += quantity
                 }else{
                     cart.products.push({id_prod: pId, quantity:quantity})
                 }
@@ -117,7 +117,7 @@ export const checkout = async (req,res) => {
         const cId = req.params.cId
         const cart = await cartModel.findById(cId)
         let productStockNull = []
-        if(cart){
+        if(cart && cart.products.length > 0){
             for(const prod of cart.products){
                 let producto = await productModel.findById(prod.id_prod)
                 if(producto.stock - prod.quantity < 0){
@@ -128,6 +128,7 @@ export const checkout = async (req,res) => {
                 
                 let totalAmount = 0
                 for(let prod of cart.products){
+                    console.log(prod.id_prod)
                     let producto = await productModel.findById(prod.id_prod)
                     if(producto){
                         producto.stock -= prod.quantity
@@ -144,7 +145,7 @@ export const checkout = async (req,res) => {
                 })
 
                 await cartModel.findByIdAndUpdate(cId, {products: []})
-                res.status(200).send({tiket: newTicket, render: '/'})
+                res.status(200).send({tiket: newTicket, render: '/', productsNull: productStockNull})
             }else{
                 productStockNull.forEach((prodId) => {
                     let indice = cart.products.findIndex(prod => prod.id == prodId)
@@ -156,6 +157,8 @@ export const checkout = async (req,res) => {
                 res.status(400).send(productStockNull)
 
             }
+        }else{
+            res.status(404).send({message: 'Carrito vacio'})
         }
         
     } catch (e) {

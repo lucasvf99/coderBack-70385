@@ -6,7 +6,7 @@ let btnCart = document.getElementsByClassName('button') //agregar carrito
 let btnL = document.getElementsByClassName('btn-less')
 let btnP = document.getElementsByClassName('btn-plus')
 const cartL = document.getElementById('cart-length')
-let p = 1 //quantity product por defecto
+// let p = 1 //quantity product por defecto
 const btn = [...btnCart]
 const btnLess = [...btnL]
 const btnPlus = [...btnP]
@@ -23,7 +23,7 @@ if(quantityCartLocal){
 //btns sumar restar cantidad
 
 btnLess.forEach(el => el.addEventListener('click', (e)=> {
-    p = e.target.parentElement.children[1]
+    let p = e.target.parentElement.children[1]
     if(p.innerText >= 1 ){
         p.innerText = parseInt(p.innerText) - 1
         p = p.innerText
@@ -32,12 +32,9 @@ btnLess.forEach(el => el.addEventListener('click', (e)=> {
     }
 }))
 btnPlus.forEach(el => el.addEventListener('click', (e)=> {
-    p = e.target.parentElement.children[1]
+    let p = e.target.parentElement.children[1]
     if(p.innerText >= 0){
         p.innerText = parseInt(p.innerText) + 1 
-        p = p.innerText
-        console.log(p)
-        return p
     }
 }))
 
@@ -79,12 +76,13 @@ const cartLenght = (data) => {
 //agregar producto
 btn.forEach(el => {
     el.addEventListener('click',  (e)=>{
-
+        let quantity = e.target.parentElement.children[4].children[1].innerText
         const product = e.target.parentElement.id
-        fetch(`http://localhost:8080/api/cart/${cart}/${product}`,{
+        
+        fetch(`http://localhost:8080/api/cart/insertproduct/${cart}/${product}`,{
             method: "POST",
             headers: {"Content-Type" : "application/json"},
-            body: JSON.stringify({quantity : parseInt(p)})
+            body: JSON.stringify({quantity : parseInt(quantity)})
         })
         .then(res => {
             if(res.status == 500){
